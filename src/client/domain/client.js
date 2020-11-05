@@ -22,6 +22,9 @@ const ClientSchema= mongoose.Schema({
     phone:{
         type:String,
         required:true
+    },
+    balance:{
+        type:Float64Array
     }
 })
 
