@@ -6,11 +6,12 @@ const routes = require('./common/routes');
 
 //---settings
 app.set('port', process.env.PORT || 3000);
+app.use('/',routes);
 
 //---middlewares
 
 //---routes
-require ('./app/routes')
+
 //---staticfiles
 
 app.listen(app.get('port'),()=>{
