@@ -7,8 +7,10 @@ const routes = require('./common/routes');
 
 //---settings
 app.set('port', process.env.PORT || 3000);
-app.use('/',routes);
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 require('./common/database-connection');
+app.use('/',routes);
 
 //---middlewares
 
