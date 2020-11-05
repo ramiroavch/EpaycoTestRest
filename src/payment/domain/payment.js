@@ -8,7 +8,10 @@ const paymentSchema=mongoose.Schema({
     date:{
         type:Date,
         required:true
+    },
+    status:{
+        type:String,
+        required:true
     }
 })
-
 module.exports = mongoose.model ('user',userSchema);
