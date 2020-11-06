@@ -6,7 +6,7 @@ const paymentSchema=mongoose.Schema({
         required:true
     },
     amount:{
-        type:Float64Array,
+        type:Number,
         required:true
     },
     date:{
