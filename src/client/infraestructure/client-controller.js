@@ -11,8 +11,15 @@ const registerClient = async (req,res)=>{
     }
 };
 
-const payWallet = (req,res)=>{
-    res.send("recarga de billetera");
+const payWallet = async (req,res)=>{
+    try{
+        const {document,phone,amount} = req.body;
+        const client = await clientService.payWallet(document,phone,amount);
+        res.status(200).send(client);
+    }
+    catch(err){
+        res.status(err.code).send(err.message);
+    }
 }
 
 const consultWallet = (req,res)=>{

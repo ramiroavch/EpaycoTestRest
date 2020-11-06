@@ -1,3 +1,4 @@
+const CustomError = require('../../../common/custom-error');
 const client = require('../domain/client');
 
 const createClient = async (document,name,lastname,email,phone)=>{
@@ -11,7 +12,28 @@ const createClient = async (document,name,lastname,email,phone)=>{
 }
 
 
+const payWallet = async (document,phone,amount)=>{
+    try{
+        const response = await client.findOne({document:document,phone:phone});
+        validateClient(response);
+        response.balance += amount;
+        await response.save();
+        return response;
+    }
+    catch(err){
+        throw new CustomError(505,"Error al recargar la billetera");
+    }
+}
+
+
+const validateClient = client => {
+    if(client==null){
+        throw new CustomError(404,"Cliente no encontrado");
+    }
+}; 
+
 module.exports={
-    createClient
+    createClient,
+    payWallet
 }
 
