@@ -1,6 +1,6 @@
 const mongoose = require ('mongoose');
 
-const clientSchema= mongoose.Schema({
+const clientSchema= new mongoose.Schema({
     document:{
         type:String,
         required:true,
@@ -23,8 +23,19 @@ const clientSchema= mongoose.Schema({
         required:true
     },
     balance:{
-        type:Float64Array
+        type:Number,
+        required:true
     }
 })
+
+clientSchema.post('save', (err, res, next) => {
+    if (err.name === 'MongoError' && err.code === 11000) {
+        return next({success:false,message:"Usuario ya existe"});
+    }
+    else if (err.name==='MongoError') {
+        return next({success:false,message:"Error al crear el cliente"});
+    }
+    next();
+});
 
 module.exports = mongoose.model('client',clientSchema)
