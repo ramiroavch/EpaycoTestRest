@@ -7,7 +7,7 @@ const createClient = async (document,name,lastname,email,phone)=>{
         await response.save()
         return response;
     } catch(e){
-        throw new Error("Error creando el cliente");
+        throw new CustomError(500,"Error al crear el cliente");
     }
 }
 
@@ -32,7 +32,7 @@ const consultWallet = async(document,phone)=>{
         return {balance: response.balance};
     }
     catch(err){
-        throw new CustomError(500,"Error al recargar la billetera");
+        throw new CustomError(500,"Error al consultar el balance");
     }
 }
 
