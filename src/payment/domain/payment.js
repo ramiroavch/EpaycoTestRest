@@ -9,10 +9,6 @@ const paymentSchema=mongoose.Schema({
         type:Number,
         required:true
     },
-    date:{
-        type:Date,
-        required:true
-    },
     status:{
         type:String,
         required:true
@@ -20,6 +16,9 @@ const paymentSchema=mongoose.Schema({
     token:{
         type:String,
         required:true
+    },
+    date:{
+        type:Date
     }
 })
-module.exports = mongoose.model ('user',userSchema);
+module.exports = mongoose.model ('payment',paymentSchema);
