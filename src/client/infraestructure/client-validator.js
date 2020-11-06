@@ -43,9 +43,9 @@ exports.registerValidator = [
 
 exports.payWalletValidator = [
     check('document')
-    .trim()
-    .not()
-    .isEmpty()
+        .trim()
+        .not()
+        .isEmpty()
     .withMessage('Client document is required'),
     check('phone')
         .trim()
@@ -53,7 +53,9 @@ exports.payWalletValidator = [
         .isEmpty()
         .withMessage('Client phone is required'),
     check('amount')
-        .trim()
+        .not()
+        .isString()
+        .withMessage("El valor no puede ser un String")
         .not()
         .isEmpty()
         .withMessage('Recharge Amount is required')
