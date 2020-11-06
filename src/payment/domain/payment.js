@@ -1,6 +1,10 @@
 const mongoose = require ('mongoose');
 
 const paymentSchema=mongoose.Schema({
+    document:{
+        type:String,
+        required:true
+    },
     amount:{
         type:Float64Array,
         required:true
@@ -10,6 +14,10 @@ const paymentSchema=mongoose.Schema({
         required:true
     },
     status:{
+        type:String,
+        required:true
+    },
+    token:{
         type:String,
         required:true
     }
