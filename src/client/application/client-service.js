@@ -21,10 +21,20 @@ const payWallet = async (document,phone,amount)=>{
         return response;
     }
     catch(err){
-        throw new CustomError(505,"Error al recargar la billetera");
+        throw new CustomError(500,"Error al recargar la billetera");
     }
 }
 
+const consultWallet = async(document,phone)=>{
+    try{
+        const response = await client.findOne({document:document,phone:phone});
+        validateClient(response);
+        return {balance: response.balance};
+    }
+    catch(err){
+        throw new CustomError(500,"Error al recargar la billetera");
+    }
+}
 
 const validateClient = client => {
     if(client==null){
@@ -34,6 +44,7 @@ const validateClient = client => {
 
 module.exports={
     createClient,
-    payWallet
+    payWallet,
+    consultWallet
 }
 

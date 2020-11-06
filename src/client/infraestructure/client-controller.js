@@ -18,12 +18,25 @@ const payWallet = async (req,res)=>{
         res.status(200).send(client);
     }
     catch(err){
-        res.status(err.code).send(err.message);
+        if(err.code!=null)
+            res.status(err.code).send(err.message);
+        else
+            res.status(500).send(err.message);
     }
 }
 
-const consultWallet = (req,res)=>{
-    res.send("obtener saldo de billetera")
+const consultWallet = async(req,res)=>{
+    try{
+        const {document,phone} = req.body;
+        const client = await clientService.consultWallet(document,phone);
+        res.status(200).send(client);
+    }
+    catch(err){
+        if(err.code!=null)
+            res.status(err.code).send(err.message);
+        else
+            res.status(500).send(err.message);
+    }
 }
 
 module.exports={
