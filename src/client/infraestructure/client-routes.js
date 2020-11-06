@@ -5,7 +5,7 @@ const {registerValidator,resultRegisterValidator,payWalletValidator,
         consultWallet} = require ('./client-validator');
 
 clientRoutes.post('/',registerValidator,resultRegisterValidator,clientController.registerClient);
-clientRoutes.post('/wallet',payWalletValidator,resultRegisterValidator,clientController.payWallet);
+clientRoutes.put('/wallet',payWalletValidator,resultRegisterValidator,clientController.payWallet);
 clientRoutes.get('/wallet',consultWallet,resultRegisterValidator,clientController.consultWallet);
 
 module.exports = clientRoutes;
