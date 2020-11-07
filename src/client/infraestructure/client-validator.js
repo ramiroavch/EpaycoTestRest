@@ -13,21 +13,29 @@ exports.resultRegisterValidator =(req,res,next)=>{
 
 exports.registerValidator = [
     check('document')
+        .isString()
+        .withMessage("document debe ser un string")
         .trim()
         .not()
         .isEmpty()
         .withMessage('Client document is required'),
     check('name')
+        .isString()
+        .withMessage("name debe ser un string")
         .trim()
         .not()
         .isEmpty()
         .withMessage('Client name is required'),
     check('lastname')
+        .isString()
+        .withMessage("lastname debe ser un string")
         .trim()
         .not()
         .isEmpty()
         .withMessage('Client lastname is required'),
     check('email')
+        .isString()
+        .withMessage("email debe ser un string")
         .trim()
         .not()
         .isEmpty()
@@ -35,6 +43,8 @@ exports.registerValidator = [
         .isEmail()
         .withMessage('Invalid email'),
     check('phone')
+        .isString()
+        .withMessage("phone debe ser un string")
         .trim()
         .not()
         .isEmpty()
@@ -43,11 +53,15 @@ exports.registerValidator = [
 
 exports.payWalletValidator = [
     check('document')
+        .isString()
+        .withMessage("document debe ser un string")
         .trim()
         .not()
         .isEmpty()
     .withMessage('Client document is required'),
     check('phone')
+        .isString()
+        .withMessage("phone debe ser un string")
         .trim()
         .not()
         .isEmpty()
@@ -63,11 +77,15 @@ exports.payWalletValidator = [
 
 exports.consultWallet = [
     check('document')
+        .isString()
+        .withMessage("document debe ser un string")
         .trim()
         .not()
         .isEmpty()
         .withMessage('Client document is required'),
     check('phone')
+        .isString()
+        .withMessage("phone debe ser un string")
         .trim()
         .not()
         .isEmpty()
