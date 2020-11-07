@@ -1,26 +1,47 @@
 const CustomError = require('../../../common/custom-error');
-const payment = require('../domain/payment');
+const Payment = require('../domain/payment');
+const mailSender = require('../../../common/mailSender.js');
+const Client = require('../../client/domain/client');
 
 const makePayment = async(document,amount,token)=>{
-    const response= new payment({document,amount,status:'false',token});
+    const client = await Client.findOne({document:document});
+    validateClient(client);
+    checkCredit(client.balance,amount);
+    const payment= new Payment({document,amount,status:'false',token});
     try{
-        await response.save()
-        return response;
+        mailSender.sendMail(client.email,token.toString(),amount,toString());
+    }
+    catch(err){
+        throw err;
+    }
+    try{
+        await payment.save();
     } catch(e){
         throw new CustomError(500,"Error al registrar el pago");
+        
     }
+    return payment;
 }
 
 const authPayment = async(document,token)=>{
     try{
-        const response = await payment.findOne({document:document,token:token});
-        validatePayment(response);
-        response.status= "true";
-        await response.save;
-        return response;
+        const client = await Client.findOne({document:document});
+        validateClient(client);
+        const payment = await Payment.findOne({document:document,token:token});
+        validatePayment(payment);
+        checkCredit(client.balance,payment.amount);
+        payment.status= "true";
+        client.balance -=payment.amount;
+        console.log("El balance ess  "+client.balance)
+        await client.save();
+        await payment.save();
+        return payment;
     }
     catch(err){
-        throw new CustomError(500,"Error al confirmar el pago"); 
+        if(err.code!=null)
+            throw new CustomError(err.code,err.message);
+        else
+            throw new CustomError(500,"Error al confirmar el pago "); 
     }
 
 }
@@ -29,7 +50,22 @@ const validatePayment = payment => {
     if(payment==null){
         throw new CustomError(404,"Pago no encontrado");
     }
+    if(payment.status=='true'){
+        throw new CustomError(405,"Este pago ya ha sido validado");
+    }
 }; 
+
+const validateClient = client => {
+    if(client==null){
+        throw new CustomError(404,"Cliente no encontrado");
+    }
+};
+
+const checkCredit= (balance,amount)=>{
+    if(balance<amount){
+        throw new CustomError(405,'No posee el crédito para realizar el pago');
+    }
+}
 
 module.exports = {
     makePayment,
