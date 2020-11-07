@@ -8,9 +8,9 @@ const makePayment = async (req,res)=>{
     }
     catch(err){
         if(err.code!=null)
-            res.status(err.code).send(err.message);
+            res.status(err.code).send({success:false,message:err.message});
         else
-            res.status(500).send(err.message);
+            res.status(500).send({success:false,message:err.message});
     }
 }
 
@@ -22,9 +22,9 @@ const authPayment = async(req,res)=>{
     }
     catch(err){
         if(err.code!=null)
-            res.status(err.code).send(err.message);
+            res.status(err.code).send({success:false,message:err.message});
         else
-            res.status(500).send(err.message);
+            res.status(500).send({success:false,message:err.message});
     }
 }
 
