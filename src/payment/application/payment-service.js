@@ -17,8 +17,7 @@ const makePayment = async(document,amount,token)=>{
     try{
         await payment.save();
     } catch(e){
-        throw new CustomError(500,"Error al registrar el pago");
-        
+        throw new CustomError((err.code || 500), err.code ? err.message : "Error al enviar el pago");   
     }
     return payment;
 }
@@ -38,10 +37,7 @@ const authPayment = async(document,token)=>{
         return payment;
     }
     catch(err){
-        if(err.code!=null)
-            throw new CustomError(err.code,err.message);
-        else
-            throw new CustomError(500,"Error al confirmar el pago "); 
+        throw new CustomError((err.code || 500), err.code ? err.message : "Error al autenticar el pago");
     }
 
 }
