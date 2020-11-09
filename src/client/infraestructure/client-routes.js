@@ -6,6 +6,6 @@ const {registerValidator,resultRegisterValidator,payWalletValidator,
 
 clientRoutes.post('/',registerValidator,resultRegisterValidator,clientController.registerClient);
 clientRoutes.put('/wallet',payWalletValidator,resultRegisterValidator,clientController.payWallet);
-clientRoutes.get('/wallet',consultWallet,resultRegisterValidator,clientController.consultWallet);
+clientRoutes.post('/wallet',consultWallet,resultRegisterValidator,clientController.consultWallet);
 
 module.exports = clientRoutes;
