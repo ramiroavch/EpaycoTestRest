@@ -6,7 +6,7 @@ const cors = require('cors');
 const routes = require('./common/routes');
 
 //---settings
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 3001);
 app.use(express.json());
 
 app.use(cors());

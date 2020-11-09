@@ -9,7 +9,7 @@ const makePayment = async(document,amount,token)=>{
     checkCredit(client.balance,amount);
     const payment= new Payment({document,amount,status:'false',token});
     try{
-        mailSender.sendMail(client.email,token.toString(),amount,toString());
+        mailSender.sendMail(client.email,token.toString(),amount.toString());
     }
     catch(err){
         throw err;
