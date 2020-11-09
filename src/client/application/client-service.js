@@ -21,7 +21,7 @@ const payWallet = async (document,phone,amount)=>{
         return response;
     }
     catch(err){
-        throw new CustomError(500,"Error al recargar la billetera");
+        throw new CustomError((err.code || 500), err.code ? err.message : "Error al recargar la billetera");
     }
 }
 
@@ -32,7 +32,7 @@ const consultWallet = async(document,phone)=>{
         return {balance: response.balance};
     }
     catch(err){
-        throw new CustomError(500,"Error al consultar el balance");
+        throw new CustomError((err.code || 500), err.code ? err.message : "Error al consultar la billetera");
     }
 }
 

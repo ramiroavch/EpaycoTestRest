@@ -18,10 +18,7 @@ const payWallet = async (req,res)=>{
         res.status(200).send(client);
     }
     catch(err){
-        if(err.code!=null)
-            res.status(err.code).send({success:false,message:err.message});
-        else
-            res.status(500).send({success:false,message:err.message});
+        res.status(err.code).send({success:false,message:err.message});
     }
 }
 
@@ -32,10 +29,7 @@ const consultWallet = async(req,res)=>{
         res.status(200).send(client);
     }
     catch(err){
-        if(err.code!=null)
-            res.status(err.code).send({success:false,message:err.message});
-        else
-            res.status(500).send({success:false,message:err.message});
+        res.status(err.code).send({success:false,message:err.message});
     }
 }
 
