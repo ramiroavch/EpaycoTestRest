@@ -1,0 +1,309 @@
+{
+	"info": {
+		"_postman_id": "564461d7-6a32-486b-ac2e-7c6057c34879",
+		"name": "EpaycoTest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "soap",
+			"item": [
+				{
+					"name": "GetBalance",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "<soapenv:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:urn=\"urn:examples:helloservice\">\r\n   <soapenv:Header/>\r\n   <soapenv:Body>\r\n      <urn:getBalance soapenv:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\">\r\n      \t<document xsi:type=\"xsd:string\">24933360</document>\r\n        <phone xsi:type=\"xsd:string\">55555</phone>\r\n      </urn:getBalance>\r\n   </soapenv:Body>\r\n</soapenv:Envelope>",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3002/client/get-balance",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"client",
+								"get-balance"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RechargeWallet",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "<soapenv:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:urn=\"urn:examples:helloservice\">\r\n   <soapenv:Header/>\r\n   <soapenv:Body>\r\n      <urn:payWallet soapenv:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\">\r\n      \t<document xsi:type=\"xsd:string\">24933360</document>\r\n        <phone xsi:type=\"xsd:string\">55555</phone>\r\n        <amount xsi:type=\"xsd:number\">10</amount>\r\n      </urn:payWallet>\r\n   </soapenv:Body>\r\n</soapenv:Envelope>",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3002/client/pay-wallet",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"client",
+								"pay-wallet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RegisterClient",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "<soapenv:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:urn=\"urn:examples:helloservice\">\r\n   <soapenv:Header/>\r\n   <soapenv:Body>\r\n      <urn:registerClient soapenv:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\">\r\n      \t<document xsi:type=\"xsd:string\">1234</document>\r\n        <name xsi:type=\"xsd:string\">hola</name> \r\n        <lastname xsi:type=\"xsd:string\">vale</lastname>\r\n        <email xsi:type=\"xsd:string\">bebe@gmail.com</email>\r\n        <phone xsi:type=\"xsd:string\">1234</phone>\r\n      </urn:registerClient>\r\n   </soapenv:Body>\r\n</soapenv:Envelope>",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3002/client/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"client",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "MakePayment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "<soapenv:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:urn=\"urn:examples:helloservice\">\r\n   <soapenv:Header/>\r\n   <soapenv:Body>\r\n      <urn:makePayment soapenv:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\">\r\n      \t<document xsi:type=\"xsd:string\">24933360</document>\r\n        <phone xsi:type=\"xsd:string\">55555</phone>\r\n        <amount xsi:type=\"xsd:number\">10</amount>\r\n      </urn:makePayment>\r\n   </soapenv:Body>\r\n</soapenv:Envelope>",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3002/payment",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"payment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AuthPayment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "<soapenv:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:urn=\"urn:examples:helloservice\">\r\n   <soapenv:Header/>\r\n   <soapenv:Body>\r\n      <urn:authPayment soapenv:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\">\r\n      \t<document xsi:type=\"xsd:string\">24933360</document>\r\n        <token xsi:type=\"xsd:string\">978413</token>\r\n      </urn:authPayment>\r\n   </soapenv:Body>\r\n</soapenv:Envelope>",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3002/payment/auth",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"payment",
+								"auth"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "rest",
+			"item": [
+				{
+					"name": "RegisterClient",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"document\":\"24933360\",\r\n    \"name\": \"Ramiro\",\r\n    \"lastname\":\"Vargas\",\r\n    \"email\":\"ramiroavch@gmail.com\",\r\n    \"phone\":\"55555\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/client",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"client"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "MakePayment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"document\":\"24933360\",\r\n    \"amount\":10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/payment",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"payment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PayWallet",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"document\":\"24933360\",\r\n    \"phone\":\"55555\",\r\n    \"amount\":222222222\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/client/wallet",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"client",
+								"wallet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SeeBalance",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"document\":\"24933360\",\r\n    \"phone\":\"55555\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/client/wallet",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"client",
+								"wallet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AuthPayment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"document\":\"2494533360\",\r\n    \"token\":\"347776\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/payment/auth",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"payment",
+								"auth"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
