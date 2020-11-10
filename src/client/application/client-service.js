@@ -1,46 +1,52 @@
 const CustomError = require('../../../common/custom-error');
-const client = require('../domain/client');
+const {createClientXml,rechargeWalletXml,getBalanceXml} = require('../domain/clientXmlRequest');
+const axios = require ('../../../common/axios');
+const jsonParser = require ('../../../common/utils')
 
 const createClient = async (document,name,lastname,email,phone)=>{
-    const response= new client({document,name,lastname,email,phone,balance:0});
     try{
-        await response.save()
-        return response;
-    } catch(e){
-        throw new CustomError(500,"Error al crear el cliente");
+        const request= createClientXml(document,name,lastname,email,phone);
+        const response = await axios.post('/client',request);
+        const json = jsonParser(response.data,'tns:registerClientResponse');
+        const success= json["tns:success"]._text;
+        return {ok:success};
+    } catch(err){
+        const json = jsonParser(err.response.data,'soap:Fault');
+        const errorMsg= json["soap:error"]._text;
+        throw new CustomError((err.response.status || 500), err.response.status ? errorMsg : "Error al crear el cliente");
     }
 }
 
-
 const payWallet = async (document,phone,amount)=>{
     try{
-        const response = await client.findOne({document:document,phone:phone});
-        validateClient(response);
-        response.balance += amount;
-        await response.save();
-        return response;
+        const request= rechargeWalletXml(document,phone,amount);
+        const response = await axios.post('/client/pay-wallet',request);
+        const json = jsonParser(response.data,'tns:payWalletResponse');
+        const success= json["tns:success"]._text;
+        return {ok:success};
     }
     catch(err){
-        throw new CustomError((err.code || 500), err.code ? err.message : "Error al recargar la billetera");
+        const json = jsonParser(err.response.data,'soap:Fault');
+        const errorMsg= json["soap:error"]._text;
+        throw new CustomError((err.response.status || 500), err.response.status ? errorMsg : "Error al recargar la billetera");
     }
 }
 
 const consultWallet = async(document,phone)=>{
     try{
-        const response = await client.findOne({document:document,phone:phone});
-        validateClient(response);
-        return {balance: response.balance};
+        const request= getBalanceXml(document,phone);
+        const response = await axios.post('/client/get-balance',request);
+        const json = jsonParser(response.data,'tns:getBalanceResponse');
+        const balance= json["tns:balance"]._text;
+        const success = json["tns:success"]._text;
+        return {balance: balance,ok:success};
     }
     catch(err){
-        throw new CustomError((err.code || 500), err.code ? err.message : "Error al consultar la billetera");
+        const json = jsonParser(err.response.data,'soap:Fault');
+        const errorMsg= json["soap:error"]._text;
+        throw new CustomError((err.response.status || 500), err.response.status ? errorMsg : "Error al consultar la billetera");
     }
 }
-
-const validateClient = client => {
-    if(client==null){
-        throw new CustomError(404,"Cliente no encontrado");
-    }
-}; 
 
 module.exports={
     createClient,
