@@ -19,7 +19,6 @@ const mailOptions =(email,token,amount)=> {
 }
 
 const sendMail = (email,token,amount)=>{
-    console.log(token);
     transporter.sendMail(mailOptions(email,token,amount),(err,info)=>{
         if(err){
             throw new CustomError(500,err.message); 
