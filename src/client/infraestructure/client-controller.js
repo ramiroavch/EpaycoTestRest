@@ -7,7 +7,7 @@ const registerClient = async (req,res)=>{
         res.status(200).send(client);
     }
     catch(err){
-        res.status(404).send({success:false,message:err.message});
+        res.status(err.code).send({success:false,message:err.message});
     }
 };
 
